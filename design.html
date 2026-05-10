@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Markdown Converter</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        textarea { width: 100%; height: 200px; margin-bottom: 10px; }
+        .output { border: 1px solid #ddd; padding: 20px; background: #f9f9f9; }
+        .flash { color: red; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Markdown to HTML</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <textarea name="markdown_text" placeholder="Enter Markdown here...">{{ markdown_input }}</textarea>
+        <br>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if html_output %}
+        <h2>Preview:</h2>
+        <div class="output">
+            {{ html_output|safe }}
+        </div>
+    {% endif %}
+</body>
+</html>
